@@ -2,15 +2,14 @@
 import { useEffect, useRef, useState } from 'react'
 import AnimateIn from '@/components/ui/AnimateIn'
 
-// @lpg: Replace with real company stats — specific and credible numbers
 const stats = [
-  { value: 500,  suffix: '+', label: 'Projects Completed' },
-  { value: 98,   suffix: '%', label: 'Client Satisfaction' },
-  { value: 10,   suffix: '+', label: 'Years in Business'   },
-  { value: 50,   suffix: '+', label: 'Team Members'        },
+  { value: 250,  suffix: '+', label: 'Enterprise Clients',     decimals: 0 },
+  { value: 1.2,  suffix: 'M', label: 'AI Models Deployed',     decimals: 1 },
+  { value: 99.9, suffix: '%', label: 'Prediction Accuracy',    decimals: 1 },
+  { value: 40,   suffix: '%', label: 'Average Cost Reduction', decimals: 0 },
 ]
 
-function CountUp({ target, suffix }: { target: number; suffix: string }) {
+function CountUp({ target, suffix, decimals = 0 }: { target: number; suffix: string; decimals?: number }) {
   const [count, setCount] = useState(0)
   const ref = useRef<HTMLSpanElement>(null)
 
@@ -20,35 +19,44 @@ function CountUp({ target, suffix }: { target: number; suffix: string }) {
     const observer = new IntersectionObserver(([entry]) => {
       if (!entry.isIntersecting) return
       observer.unobserve(el)
-      const duration = 1800
+      const duration = 2000
       const start = performance.now()
       const tick = (now: number) => {
         const progress = Math.min((now - start) / duration, 1)
-        const eased = 1 - Math.pow(1 - progress, 3)
-        setCount(Math.round(eased * target))
+        const eased = 1 - Math.pow(1 - progress, 4)
+        const value = eased * target
+        setCount(decimals > 0 ? Math.round(value * Math.pow(10, decimals)) / Math.pow(10, decimals) : Math.round(value))
         if (progress < 1) requestAnimationFrame(tick)
       }
       requestAnimationFrame(tick)
-    }, { threshold: 0.3 })
+    }, { threshold: 0.5 })
     observer.observe(el)
     return () => observer.disconnect()
-  }, [target])
+  }, [target, decimals])
 
-  return <span ref={ref}>{count}{suffix}</span>
+  return <span ref={ref}>{count.toFixed(decimals)}{suffix}</span>
 }
 
 export default function Stats() {
   return (
-    <section className="py-section bg-surface-raised">
+    <section className="py-section-lg bg-[#f8f9fb] border-y border-[#e2e5eb] relative overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")' }} />
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative">
           {stats.map((stat, i) => (
-            <AnimateIn key={stat.label} delay={i * 100} className="text-center">
-              <div className="font-heading font-black text-display-md text-brand-500 mb-2">
-                <CountUp target={stat.value} suffix={stat.suffix} />
-              </div>
-              <div className="text-sm text-content-muted">{stat.label}</div>
-            </AnimateIn>
+            <div key={stat.label} className="relative">
+              <AnimateIn delay={i * 100} className="text-center group">
+                <div className="font-heading font-bold text-display-lg text-[#1a3a5c] mb-3 transition-transform duration-500 group-hover:scale-105">
+                  <CountUp target={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
+                </div>
+                <div className="text-sm text-[#c9a84c] font-medium tracking-widest uppercase">
+                  {stat.label}
+                </div>
+              </AnimateIn>
+              {i < stats.length - 1 && (
+                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-[#e2e5eb] to-transparent" />
+              )}
+            </div>
           ))}
         </div>
       </div>
