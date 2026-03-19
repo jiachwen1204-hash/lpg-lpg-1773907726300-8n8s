@@ -2,6 +2,23 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "AI Technology Platform — Intelligent Business Solutions | WE",
+  description: "Transform your business with WEQ's AI technology platform. Access intelligent automation, predictive analytics, and seamless cloud integration to unlock new gro",
+  openGraph: {
+    title: "AI Solutions That Make Your Business Smarter | WEQ",
+    description: "Stop wasting resources on manual processes. WEQ's AI platform delivers intelligent automation and data-driven insights to help you move faster and stay competit",
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "AI Solutions That Make Your Business Smarter | WEQ",
+    description: "Stop wasting resources on manual processes. WEQ's AI platform delivers intelligent automation and data-driven insights to help you move faster and stay competit",
+  },
+}
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-surface">
