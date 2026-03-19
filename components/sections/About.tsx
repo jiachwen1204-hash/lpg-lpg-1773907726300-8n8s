@@ -1,5 +1,6 @@
+'use client'
+
 import AnimateIn from '@/components/ui/AnimateIn'
-import CountUp from '@/components/ui/CountUp'
 import { CheckCircle, Users, Zap, Shield, Globe, Award } from 'lucide-react'
 
 const CONTENT = {
@@ -83,7 +84,7 @@ export default function About() {
                     {/* Main stat display */}
                     <div className="text-center">
                       <div className="font-heading font-bold text-[4rem] lg:text-[5rem] leading-none text-[#1a3a5c] mb-2">
-                        <CountUp end={12} suffix="+" />
+                        12+
                       </div>
                       <div className="text-[#c9a84c] text-sm font-medium tracking-widest uppercase">
                         Years of Excellence
@@ -227,7 +228,7 @@ export default function About() {
                   {/* Actual stat */}
                   <div className="relative pt-8">
                     <div className={`font-heading font-bold text-[2.5rem] lg:text-[3.5rem] leading-none ${stat.accent ? 'text-[#c9a84c]' : 'text-[#ffffff]'}`}>
-                      <CountUp end={stat.value} suffix={stat.suffix} decimals={stat.value % 1 !== 0 ? 1 : 0} />
+                      {stat.value % 1 !== 0 ? stat.value.toFixed(1) : stat.value}{stat.suffix}
                     </div>
                     <div className="text-sm font-medium text-[#ffffff]/50 mt-3 tracking-wide uppercase">
                       {stat.label}

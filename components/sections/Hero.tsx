@@ -120,7 +120,7 @@ export default function Hero() {
 
           {/* Right side - Abstract AI visualization */}
           <div className="lg:col-span-5 hidden lg:block relative">
-            <AnimateIn delay={200} animation="scale-in">
+            <AnimateIn delay={200}>
               <div className="relative">
                 {/* Main visual card */}
                 <div className="relative rounded-lg border border-[#2e3540] bg-[#0f1a27]/60 backdrop-blur-sm p-8 overflow-hidden">
@@ -150,7 +150,7 @@ export default function Hero() {
                           i === 0 ? 'bg-[#c9a84c]' : 
                           i === 1 ? 'bg-[#1a3a5c]' : 
                           i === 2 ? 'bg-[#1a3a5c]' : 
-          i === 3 ? 'bg-[#0369A1]' : 'bg-[#1a3a5c]'
+                          i === 3 ? 'bg-[#0369A1]' : 'bg-[#1a3a5c]'
                         }`} />
                       </div>
                     ))}
