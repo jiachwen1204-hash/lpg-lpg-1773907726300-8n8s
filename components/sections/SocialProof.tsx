@@ -139,8 +139,8 @@ export default function SocialProof() {
               { label: 'GDPR', sub: 'Compliant' },
               { label: 'AWS Partner', sub: 'Advanced Tier' },
             ].map((cert, i) => (
-              <div key={i} className="flex items-center gap-3 px-6 py-4 rounded-lg border border-[#e2e5eb] bg-[#f8f9fb]">
-                <div className="w-10 h-10 rounded-full bg-[#1a3a5c]/5 flex items-center justify-center">
+              <div key={i} className="group flex items-center gap-3 px-6 py-4 rounded-lg border border-[#e2e5eb] bg-[#f8f9fb] hover:border-[#c9a84c]/40 hover:shadow-md hover:shadow-[#1a3a5c]/5 transition-all duration-300 cursor-default">
+                <div className="w-10 h-10 rounded-full bg-[#1a3a5c]/5 flex items-center justify-center group-hover:bg-[#c9a84c]/10 transition-colors duration-300">
                   <div className="w-3 h-3 rounded-full bg-[#c9a84c]" />
                 </div>
                 <div>

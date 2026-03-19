@@ -1,3 +1,4 @@
+```tsx
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import AnimateIn from '@/components/ui/AnimateIn'
@@ -39,22 +40,22 @@ function CountUp({ target, suffix, decimals = 0 }: { target: number; suffix: str
 
 export default function Stats() {
   return (
-    <section className="py-section-lg bg-[#f8f9fb] border-y border-[#e2e5eb] relative overflow-hidden">
+    <section className="py-section-lg bg-brand-50 border-y border-brand-200 relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")' }} />
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {stats.map((stat, i) => (
             <div key={stat.label} className="relative">
               <AnimateIn delay={i * 100} className="text-center group">
-                <div className="font-heading font-bold text-display-lg text-[#1a3a5c] mb-3 transition-transform duration-500 group-hover:scale-105">
+                <div className="font-heading font-bold text-display-lg text-brand-900 mb-3 transition-transform duration-500 group-hover:scale-105">
                   <CountUp target={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
                 </div>
-                <div className="text-sm text-[#c9a84c] font-medium tracking-widest uppercase">
+                <div className="font-body text-sm text-brand-500 font-medium tracking-widest uppercase">
                   {stat.label}
                 </div>
               </AnimateIn>
               {i < stats.length - 1 && (
-                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-[#e2e5eb] to-transparent" />
+                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-16 w-px bg-gradient-to-b from-transparent via-brand-200 to-transparent" />
               )}
             </div>
           ))}
@@ -63,3 +64,4 @@ export default function Stats() {
     </section>
   )
 }
+```
